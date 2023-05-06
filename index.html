@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Orçamento personalizado</title>
+</head>
+<body>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gerar PDF com JavaScript</title>
+	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<meta charset="utf-8">
+	
+	<style type="text/css">
+		
+		@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Montserrat:wght@100&display=swap');
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+font-family: sans-serif;
+}
+
+html,body{
+	background-color: #4132a6;
+	height: 100%;
+}
+
+/*container*/
+.container{
+
+	
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+
+}
+.container2{
+	background-color:white;
+	border: 2px solid black;
+	border-radius: 20px;
+	text-align: center;
+	width: 100%;
+	max-width: 380px;
+	margin: 0 auto;
+
+		margin-top: 20px;
+	margin-bottom: 20px;
+}
+.container2 h1{
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+.container2 h1{
+	margin-left: 30px;
+	font-family: sans-serif;
+	color: #4132a6;
+	font-weight: 500;
+	text-align: left;
+}
+.containerflex{
+
+	background-color: ;
+ 	display: flex;
+}
+.pai{
+	margin: 0 auto;
+	width: 40%;
+}
+.container2 .sinlge{
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.container2 .sinlge p{
+	font-size: 15px;
+	color: #4132a6;
+	margin-bottom: 7px;
+}
+.container2 .sinlge input{
+	border-radius: 5px;
+	width: 160px;
+	border: 1px solid black;
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+.produtos{
+	max-width: 400px;
+	margin: 0 auto;
+	text-align: center;
+}
+.produtos h3{
+	margin-left: 30px;
+		padding-top: 20px;
+	margin-bottom: 30px;
+	font-size: 28px;
+	font-family: sans-serif;
+	color: #4132a6;
+	font-weight: 500;
+	text-align: left;
+}
+.pai2{
+	max-width: 360px;
+	border-radius: 10px;
+	border:1px solid black;
+	display: flex;
+	margin: 0 auto;
+}
+.pai2 .sinlge{
+	margin: 0 auto;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.pai2 .sinlge input{
+	margin: 0 auto;
+	width: 90px;
+}
+.btnsadd{
+	width: 30%;
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+}
+.btn1{
+width: 30%;
+	margin: 0 auto;
+	margin-top: 10px;
+
+
+}
+.btn1 button{
+	cursor: pointer;
+	border: none;
+	width: 40px;
+	border: 2px solid green;
+	height: 40px;
+	background-color: white;
+	border-radius: 30px;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size:30px;
+/* identical to box height, or 30px */
+color: green;
+background-color: #bbf0be;
+}
+
+
+
+.btn2{
+		margin: 0 auto;
+	width: 30%;
+	margin-top: 10px;
+	text-align: center;
+
+}
+.btn2 button{
+	cursor: pointer;
+	border: none;
+	width: 40px;
+	border: 2px solid red;
+	height: 40px;
+	background-color: white;
+	border-radius: 30px;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size:30px;
+/* identical to box height, or 30px */
+color: red;
+background-color: #f5c4c4;
+}
+
+
+.btn{
+	margin-top: 60px;
+	text-align: center;
+	position: relative;
+
+}
+.btn button{
+	margin-bottom: 20px;
+	cursor: pointer;
+	border: none;
+	width: 250px;
+	border: 2px solid blue;
+	height: 60px;
+	background-color: white;
+	border-radius: 30px;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 700;
+	font-size:17px;
+/* identical to box height, or 30px */
+color: blue;
+}
+
+
+
+	</style>
+
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+	
+
+	<script>
+		function gerarPDF() {
+			// coletar dados
+			var nome = document.getElementById("nome").value;
+			var CPF = document.getElementById("CPF").value;
+			var cidade = document.getElementById("cidade").value;
+			var CEP = document.getElementById("CEP").value;
+			var telefone = document.getElementById("telefone").value;
+			var endereco = document.getElementById("endereco").value;
+			var email = document.getElementById("email").value;
+
+		var doc = new jsPDF();
+
+		// Título e informações do cliente
+		doc.setFontSize(14);
+		doc.setFontType("bold");
+		doc.text("Orçamento (Proposta) Nº 3514", 15, 35);
+		doc.setFontSize(8);
+
+		doc.text("Informações do Cliente", 15, 40);
+		doc.setFontType("normal");	
+
+		nome = nome.toUpperCase()
+		doc.text(`${nome}`, 15, 60);
+		doc.text(`CPF: ${CPF}\nRua Sebastião Alves Ferreira, 1605 - Bairro Alto\nCuritiba - PR - CEP: ${CEP}\nTelefone: ${telefone}\nEmail: ${email}`, 15, 70);
+		doc.setFontType("bold");
+
+		doc.text("Itens do Orçamento", 15, 110);
+
+		// Informações da empresa
+		doc.setFontSize(12);
+
+		doc.setFontType("bold");
+		doc.text("MIX TOOLS INDUSTRIA E COMERCIO LTDA", doc.internal.pageSize.getWidth() - 20, 20, { align: "right" });
+		doc.setFontSize(8);
+		doc.setFontType("bold");
+		doc.text("http://www.vixferrametnas.com.br", doc.internal.pageSize.getWidth() - 20, 30, { align: "right" });
+		doc.setFontSize(10);
+		doc.setFontType("normal");
+		doc.text("CNPJ: 15.625.795/0001-09\nInscrição Estadual: 9059746704\nRua Eduardo Negrello, 53\nNovo Mundo\nCuritiba - PR - CEP: 81020-280\nTelefone: (41) 3149-1313", doc.internal.pageSize.getWidth() - 20, 40, { align: "right" });
+
+
+
+		// 10/04/2023 às 14:37:59
+		// 10/04/2023
+
+
+
+
+		var dataAtual = new Date();
+
+		let horaAtual = dataAtual.getHours();
+		let minutosAtual = dataAtual.getMinutes();
+		let segundosAtual = dataAtual.getSeconds();
+
+		var dataFormatada = dataAtual.getDate() + '/' + (dataAtual.getMonth() + 1) + '/' + dataAtual.getFullYear();
+
+
+		doc.setFontSize(10);
+		doc.text(`Orçamento (Proposta) - incluído em: ${dataFormatada} às ${horaAtual}:${minutosAtual}:${segundosAtual}`, 15, 265);
+		doc.setFontSize(10);
+		doc.text(`Previsão de Faturamento: ${dataFormatada}`, 15, 275);
+		doc.setFontSize(10);
+		doc.text("Vendedor: Cleber Juarez", 15, 285);
+		
+		//doc.setTextColor(); 
+		//doc.setFillColor(255, 0, 0); 
+		doc.text("vix", 10, 10); // exibe um texto em vermelho na posição (10, 10)
+
+
+				// seleciona a div 'produtos'
+		var produtosDiv = document.querySelector('.produtos');
+
+		// seleciona todas as divs 'pai2' dentro de 'produtos'
+		var pais2 = produtosDiv.querySelectorAll('.pai2');
+
+		// cria listas para armazenar os ids
+		var desc = [];
+		var qtd = [];
+		var unit = [];
+
+		// itera sobre todas as divs 'pai2'
+		pais2.forEach(function(pai2) {
+		  // seleciona todas as divs 'single' dentro da div 'pai2'
+		  var sinlge = pai2.querySelectorAll('.sinlge');
+		  
+		  // itera sobre todas as divs 'single'
+		  sinlge.forEach(function(sinlge, index) {
+		    // armazena o id da primeira div 'single' na lista 'desc'
+		    if (index === 0) {
+		      desc.push(sinlge.id);
+		    }
+		    // armazena o id da segunda div 'single' na lista 'qtd'
+		    if (index === 1) {
+		      qtd.push(sinlge.id);
+		    }
+		    // armazena o id da terceira div 'single' na lista 'unit'
+		    if (index === 2) {
+		      unit.push(sinlge.id);
+		    }
+		  });
+		});	
+
+		// as listas 'desc', 'qtd' e 'unit' agora contêm os ids das divs 'single'
+
+		var contador = pais2.length;
+
+		doc.text("_____________________________________________________________________________________________", 10, 120);
+		doc.text("Nome Produto", 15, 125);
+		doc.text("Quantidade", 100, 125);
+		doc.text("Preço ", 140, 125);
+		doc.text("Total", 180, 125);
+
+		doc.text("|", 90, 125);
+
+
+
+		
+		var totalitens = 0;
+
+		for(let i = 0; i < contador; i++){
+
+				var e = i * 10
+				var e2 = e + 5
+				doc.text("|", 90, 125 + e);
+				doc.text("|", 90, 125 + e2);
+				doc.text("|", 130, 125 + e);
+				doc.text("|", 130, 125 + e2);
+				doc.text("|", 170, 125 + e);
+				doc.text("|", 170, 125 + e2);
+
+
+
+
+				doc.text("_____________________________________________________________________________________________", 10, 126 + e);
+
+				console.log(desc[i])
+
+				var minhaDiv = document.querySelector(`#${desc[i]}`);
+				var meuInput = minhaDiv.querySelector('#meuInput');
+				var valor = meuInput.value;
+				
+		
+				var minhaDiv2 = document.querySelector(`#${qtd[i]}`);
+				var meuInput2 = minhaDiv2.querySelector('#meuInput');
+				var valor2 = meuInput2.value
+				valor2 = valor2 + " unidades"
+
+				var minhaDiv3 = document.querySelector(`#${unit[i]}`);
+				var meuInput3 = minhaDiv3.querySelector('#meuInput');
+				var valor3 = meuInput3.value;
+				valor3 = valor3 + "R$"
+
+
+				var total = parseInt(valor3) * parseInt(valor2)
+				totalitens = totalitens + total
+
+				total = String(total)
+				
+
+				total = total + "R$"
+
+				
+
+				var indice = i + 1
+				var indice = indice * 10
+
+				doc.text(valor, 15, 125 + indice);
+				doc.text( valor2, 100, 125 + indice);
+				doc.text( valor3, 140, 125 + indice);
+				doc.text( total, 180, 125 + indice);
+
+				if(i == contador - 1){
+					totalitens = "Total de produtos: " + totalitens + "R$"
+					doc.text( totalitens, 150, 125 + indice + 20);
+					doc.text("|", 90, 125 + e + 10);
+					doc.text("|", 130, 125 + e + 10);
+					doc.text("|", 170, 125 + e + 10);
+					doc.text("_____________________________________________________________________________________________", 10, 126 + e + 10);
+				}
+	
+		}
+
+
+
+		doc.save("orcamento.pdf");
+
+		
+			
+
+	
+			// doc.text("Nome: 10 60 " + nome, 10, 60);
+			// doc.text("Idade:  60 20 " + idade, 60, 20);
+			// doc.text("Cidade: 10 30" + cidade, 10, 30);
+
+	
+			
+		};
+
+
+		function adicionarNovaDiv() {
+
+			atributos = ["desc", "qtd", "unit"]
+			var produtosDiv = document.querySelector('.produtos');
+			var pai2Divs = produtosDiv.querySelectorAll('.pai2');
+			var contador = pai2Divs.length;
+			var cont = contador + 1
+			
+
+			var produtos = document.querySelector('.produtos');
+			var pai2 = document.querySelector('.pai2');
+			var novaDiv = pai2.cloneNode(true);
+
+
+		  	var filhas = novaDiv.querySelectorAll('.sinlge');
+			  
+			  for (let i = 0; i < filhas.length; i++) {
+
+			  	var novoid = `${atributos[i]}${cont}`
+			 
+
+			    filhas[i].setAttribute('id', novoid);
+
+			  }
+
+			  produtos.appendChild(novaDiv);
+
+
+
+		};
+
+		// $(document).ready(function() {
+  //       $('#botao-adicionar').click(function() {
+  //       	console.log("chamaaando")
+  //         adicionarNovaDiv();
+  //       });
+  //     });
+  
+$(document).ready(function() {
+		$('#botao-adicionar').on('click', function() {
+    			adicionarNovaDiv();
+			});
+ });
+
+		function removerUltimaDiv() {
+			var produtos = document.querySelector('.produtos');
+		  var pai2 = document.querySelector('.pai2');
+		  var ultimaDiv = produtos.lastChild;
+		  produtos.removeChild(ultimaDiv);
+		}
+
+	</script>
+</head>
+<body>
+<div class="container">
+
+<div class="container2">
+<h1>Gerar PDF de orçamento</h1>
+
+<div class="containerflex">
+	
+<div class="pai">
+	<div class="sinlge">
+		<p>Nome do cliente</p>
+		<input type="text" id="nome">
+	</div>
+
+	<div class="sinlge">
+	<p>CPF do cliente</p>
+	<input type="text" id="CPF"><br>
+	</div>
+
+	<div class="sinlge">
+	<p>Cidade do cliente</p>
+	<input type="text" id="cidade"><br>
+	</div>
+
+	<div class="sinlge">
+		<p>CEP do cliente</p>
+		<input type="text" id="CEP"><br>
+	</div>
+
+</div>
+
+<div class="pai">
+	<div class="sinlge">
+		<p>Telefone do cliente</p>
+		<input type="text" id="telefone"><br>
+	</div>
+
+	<div class="sinlge">
+	<p>Endereço do cliente</p>
+	<input type="text" id="endereco"><br>
+	</div>
+
+	<div class="sinlge">
+	<p>Email do cliente</p>
+	<input type="text" id="email"><br>
+	</div>
+</div>
+
+
+</div>
+
+
+<div class="produtos">
+
+	<h3>Produtos</h3>
+
+	<div class="pai2">
+	<div class="sinlge" id="desc1">
+		<p>Descrição</p>
+		<input type="text" id="meuInput" ><br>
+	</div>
+
+	<div class="sinlge" id="qtd1">
+	<p>Quantidade</p>
+	<input type="text" id="meuInput"><br>
+	</div>
+
+	<div class="sinlge" id="unit1">
+	<p>Unit</p>
+	<input type="text" id="meuInput"><br>
+	</div>
+	</div>
+	
+	
+</div>
+<div class="btnsadd">
+		<div class="btn1" >
+		<button id="botao-adicionar">+</button>
+		</div>
+
+
+		<div class="btn2">
+		<button onclick="removerUltimaDiv()">-</button>
+		</div>
+</div>
+
+		<div class="btn">
+		<button onclick="gerarPDF()">Gerar PDF</button>
+		</div>
+
+		</div><!---container2--->
+	</div>
+
+
+
+
+
+</body>
+</html>
+
+
+</body>
+</html>
